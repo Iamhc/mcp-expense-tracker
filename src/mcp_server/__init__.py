@@ -1,6 +1,8 @@
 from fastmcp import FastMCP 
 import os
 from pymongo import MongoClient
+from default_category import default_categories 
+import json
 mcp=FastMCP(name="expense-tracker")
 
 def init_db():
@@ -46,6 +48,9 @@ def show(date:str="",time:str="",start_date:str="",end_date:str=""):
   
   return result
   
-
+@mcp.resource("category://list")
+def categories():
+  return json.dumps(default_categories)
+ 
 if __name__=="__main__":
     mcp.run()
