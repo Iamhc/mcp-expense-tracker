@@ -19,10 +19,14 @@ expenses = init_db()
 
 
 @mcp.tool()
-def add(expense: int, spent_on: str, date: str, time: str):
+def add(expense: int, spent_on: str, date: str, time: str, category: str):
+    if category not in default_categories:
+        return f"invalid category, choose from: {default_categories}"
+
     expenditure = {
         "expense": expense,
         "spent_on": spent_on,
+        "category": category,
         "date": date,
         "time": time
     }
@@ -40,7 +44,8 @@ def show(
     date: str = "",
     time: str = "",
     start_date: str = "",
-    end_date: str = ""
+    end_date: str = "",
+    category: str = ""
 ):
     query = {}
 
@@ -54,6 +59,9 @@ def show(
 
     if time:
         query["time"] = time
+
+    if category:
+        query["category"] = category
 
     result = list(expenses.find(query))
 

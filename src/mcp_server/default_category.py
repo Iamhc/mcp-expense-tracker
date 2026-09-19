@@ -2,5 +2,6 @@ default_categories=[
     "Education",
     "Household",
     "Transport",
-    "Health"
+    "Health",
+    "Food"
 ]
